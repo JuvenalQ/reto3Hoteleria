@@ -36,4 +36,8 @@ public class MessageRepository {
     return objMessageCrud.save(objM);
   }
 
+  //Agregue este metodo 4 
+  public void delMessage(Message objM) {
+    objMessageCrud.delete(objM);
+  }
 }

@@ -9,9 +9,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +48,19 @@ public class ScoreController {
   @ResponseStatus(HttpStatus.CREATED)
   public Score saveScore(@RequestBody Score objR) {
     return objScoreService.saveScore(objR);
+  }
+
+  //RETO4
+  @PutMapping("/update")
+  @ResponseStatus(HttpStatus.CREATED)
+  public Score updateScore(@RequestBody Score objS) {
+    return objScoreService.updateScore(objS);
+  }
+
+  @DeleteMapping("{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public Boolean delScore(@PathVariable Integer id) {
+    return objScoreService.delScore(id);
   }
 
 }

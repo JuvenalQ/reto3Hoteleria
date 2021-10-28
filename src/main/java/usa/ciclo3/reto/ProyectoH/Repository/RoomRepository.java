@@ -36,4 +36,8 @@ public class RoomRepository {
     return objRoomCrud.save(objR);
   }
 
+  //Agregue este metodo 4 
+  public void delRoom(Room objR) {
+    objRoomCrud.delete(objR);
+  }
 }

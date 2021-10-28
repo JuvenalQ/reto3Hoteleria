@@ -19,21 +19,26 @@ import usa.ciclo3.reto.ProyectoH.Repository.Crud.ScoreCrud;
 public class ScoreRepository {
 
   @Autowired
-  private ScoreCrud objRoomCrud;
+  private ScoreCrud objScoreCrud;
 
   //Obtiene los registro de la tabla 
   public List<Score> getScores() {
-    return (List<Score>) objRoomCrud.findAll();
+    return (List<Score>) objScoreCrud.findAll();
   }
 
   //obtiene el id seleccionado 
   public Optional<Score> getId(int id) {
-    return objRoomCrud.findById(id);
+    return objScoreCrud.findById(id);
   }
 
   //guardas la habitacion 
-  public Score saveScore (Score objR) {
-    return objRoomCrud.save(objR);
+  public Score saveScore(Score objR) {
+    return objScoreCrud.save(objR);
+  }
+
+  //Agregue este metodo 4 
+  public void delScore(Score objS) {
+    objScoreCrud.delete(objS);
   }
 
 }

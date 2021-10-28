@@ -34,4 +34,8 @@ public class CategoryRepository {
     return objCategoryCrud.save(objC);
   }
 
+  //Agregue este metodo 4 
+  public void delCategory(Category objC) {
+    objCategoryCrud.delete(objC);
+  }
 }

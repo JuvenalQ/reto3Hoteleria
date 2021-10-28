@@ -20,26 +20,49 @@ public class Reservation implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  /**
+   * variable
+   */
   private Integer idReservation;
   @Temporal(TemporalType.TIMESTAMP)
+  /**
+   * variable
+   */
   private Date startDate;
-  @Temporal(TemporalType.DATE)
+  @Temporal(TemporalType.TIMESTAMP)
+  /**
+   * variable
+   */
   private Date devolutionDate;
+  /**
+   * variable
+   */
   private String status = "created";
 
   //relacion tabla room
   @ManyToOne
   @JoinColumn(name = "RoomId")
   @JsonIgnoreProperties({"reservations", "room", "client"})
+  /**
+   * variable
+   */
   private Room room;
 
   //relacion tabla cliente 
   @ManyToOne
   @JoinColumn(name = "ClientId")
   @JsonIgnoreProperties({"reservations", "client", "messages"})
+  /**
+   * variable
+   */
   private Client client;
 
-  private String score; // Se cambia a futuro 
+  @OneToOne
+  @JsonIgnoreProperties("reservations")
+  /**
+   * variable
+   */
+  private Score score;
 
   public Integer getIdReservation() {
     return idReservation;
@@ -89,11 +112,11 @@ public class Reservation implements Serializable {
     this.client = client;
   }
 
-  public String getScore() {
+  public Score getScore() {
     return score;
   }
 
-  public void setScore(String score) {
+  public void setScore(Score score) {
     this.score = score;
   }
 

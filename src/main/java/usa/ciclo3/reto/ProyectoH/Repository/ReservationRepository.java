@@ -33,4 +33,10 @@ public class ReservationRepository {
   public Reservation saveRepository(Reservation objR) {
     return objReservationCrud.save(objR);
   }
+
+  //Agregue este metodo 4 
+  public void delRepository(Reservation objR) {
+    objReservationCrud.delete(objR);
+  }
+
 }

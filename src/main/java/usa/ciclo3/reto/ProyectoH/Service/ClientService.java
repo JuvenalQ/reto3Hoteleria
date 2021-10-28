@@ -45,4 +45,61 @@ public class ClientService {
       }
     }
   }
+
+  //Reto 4 
+  public Client updateClient(Client objC) {
+    if (objC.getIdClient() != null) { //Verifica si el id no está vacío
+
+      //Crea un auxiliar en el que se guarda el id del elemento
+      Optional<Client> auxClient = objClientRepository.getId(objC.getIdClient());
+
+      //Verifica que el id no sea vacío
+      if (!auxClient.isEmpty()) {
+
+        if (objC.getName() != null) {
+          auxClient.get().setName(objC.getName());
+        }
+
+        if (objC.getEmail() != null) {
+          auxClient.get().setEmail(objC.getEmail());
+        }
+
+        if (objC.getPassword() != null) {
+          auxClient.get().setPassword(objC.getPassword());
+        }
+
+        if (objC.getAge() != null) {
+          auxClient.get().setAge(objC.getAge());
+        }
+
+        //tablas relacionadas 
+        if (objC.getMessages() != null) {
+          auxClient.get().setMessages(objC.getMessages());
+        }
+
+        if (objC.getReservations() != null) {
+          auxClient.get().setReservations(objC.getReservations());
+        }
+
+        //Guarda el valor actual
+        objClientRepository.saveClient(auxClient.get());
+
+        //Retorna el valor 
+        return auxClient.get();
+      } else {
+        return objC;
+      }
+    } else {
+      return objC;
+    }
+  }
+
+  public Boolean delClient(Integer id) {
+    Boolean objEliminar = getId(id).map(Client -> {
+      objClientRepository.delClient(Client);
+      return true;
+    }).orElse(false);
+    return objEliminar;
+  }
+
 }

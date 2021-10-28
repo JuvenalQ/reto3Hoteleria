@@ -41,4 +41,47 @@ public class AdminService {
       }
     }
   }
+
+  //Reto 4 
+  public Admin updateAdmin(Admin objA) {
+    if (objA.getId() != null) { //Verifica si el id no está vacío
+
+      //Crea un auxiliar en el que se guarda el id del elemento
+      Optional<Admin> auxAd = objAdminRepository.getId(objA.getId());
+
+      //Verifica que el id no sea vacío
+      if (!auxAd.isEmpty()) {
+
+        if (objA.getName() != null) {
+          auxAd.get().setName(objA.getName());
+        }
+
+        if (objA.getEmail() != null) {
+          auxAd.get().setEmail(objA.getEmail());
+        }
+
+        if (objA.getPassword() != null) {
+          auxAd.get().setPassword(objA.getPassword());
+        }
+
+        //Guarda el valor actual de categoryAux
+        objAdminRepository.SaveAdmin(auxAd.get());
+
+        //Retorna el valor de categoryAux
+        return auxAd.get();
+      } else {
+        return objA;
+      }
+    } else {
+      return objA;
+    }
+  }
+
+  public Boolean delAdmin(Integer id) {
+    Boolean objEliminar = getId(id).map(Admin -> {
+      objAdminRepository.delAdmin(Admin);
+      return true;
+    }).orElse(false);
+    return objEliminar;
+  }
 }

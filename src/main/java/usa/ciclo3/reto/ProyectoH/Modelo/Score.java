@@ -4,6 +4,7 @@
  */
 package usa.ciclo3.reto.ProyectoH.Modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -20,6 +21,10 @@ public class Score implements Serializable {
   private Integer id;
   private Integer score; // 0 A  5 
   private String message;
+
+  @OneToOne
+  @JsonIgnoreProperties("score")
+  private Reservation reservations;
 
   public Integer getId() {
     return id;
@@ -43,6 +48,14 @@ public class Score implements Serializable {
 
   public void setMessage(String message) {
     this.message = message;
+  }
+
+  public Reservation getReservations() {
+    return reservations;
+  }
+
+  public void setReservations(Reservation reservations) {
+    this.reservations = reservations;
   }
 
 }

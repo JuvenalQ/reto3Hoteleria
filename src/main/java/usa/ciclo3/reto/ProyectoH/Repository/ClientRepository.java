@@ -35,4 +35,10 @@ public class ClientRepository {
   public Client saveClient(Client objC) {
     return (Client) objClientCrud.save(objC);
   }
+
+  //Agregue este metodo 4 
+  public void delClient(Client objC) {
+    objClientCrud.delete(objC);
+  }
+
 }

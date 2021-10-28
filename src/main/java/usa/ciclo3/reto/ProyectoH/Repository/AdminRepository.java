@@ -35,4 +35,9 @@ public class AdminRepository {
   public Admin SaveAdmin(Admin objA) {
     return objAdminCrud.save(objA);
   }
+
+  //Agregue este metodo 4 
+  public void delAdmin(Admin objA) {
+    objAdminCrud.delete(objA);
+  }
 }

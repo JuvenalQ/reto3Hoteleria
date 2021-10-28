@@ -26,7 +26,7 @@ public class RoomService {
   public List<Room> getRooms() {
     return objRepository.getRooms();
   }
-  
+
   //obtiene el registro seleccionado 
   public Optional<Room> getid(int id) {
     return objRepository.getId(id);
@@ -46,5 +46,65 @@ public class RoomService {
         return objR;
       }
     }
+  }
+
+  //Reto 4 
+  public Room updateReservation(Room objR) {
+    if (objR.getId() != null) { //Verifica si el id no está vacío
+
+      //Crea un auxiliar en el que se guarda el id del elemento
+      Optional<Room> auxRoom = objRepository.getId(objR.getId());
+
+      //Verifica que el id no sea vacío
+      if (!auxRoom.isEmpty()) {
+
+        if (objR.getName() != null) {
+          auxRoom.get().setName(objR.getName());
+        }
+
+        if (objR.getHotel() != null) {
+          auxRoom.get().setHotel(objR.getHotel());
+        }
+
+        if (objR.getStars() != null) {
+          auxRoom.get().setStars(objR.getStars());
+        }
+
+        if (objR.getDescription() != null) {
+          auxRoom.get().setDescription(objR.getDescription());
+        }
+
+        //Tablas relacionadas   
+        if (objR.getCategory() != null) {
+          auxRoom.get().setCategory(objR.getCategory());
+        }
+
+        if (objR.getMessages() != null) {
+          auxRoom.get().setMessages(objR.getMessages());
+        }
+
+        if (objR.getReservations() != null) {
+          auxRoom.get().setReservations(objR.getReservations());
+        }
+
+        //Guarda el valor actual
+        objRepository.saveRoom(auxRoom.get());
+
+        //Retorna el valor 
+        return auxRoom.get();
+      } else {
+        return objR;
+      }
+    } else {
+      return objR;
+    }
+  }
+
+  public Boolean delRoom(Integer id) {
+    Boolean objEliminar = getid(id).map(Room -> {
+      objRepository.delRoom(Room);
+      return true;
+    }).orElse(false);
+    return objEliminar;
   }
 }
